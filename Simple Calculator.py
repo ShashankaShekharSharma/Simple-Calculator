@@ -43,29 +43,15 @@ def multiply_numbers(result):
         result=n1*n2
         print(f"Product : {result}")
         return result
-      
-    num = float(input("Enter the number to multiply: "))
-    result *= num
-    print(f"Product: {result}")
-    return result
-  
+    
 def factorial_of_number(result):
-    if result flag:
-        num = int(result)
-        fact = 1
-        for i in range(1, num + 1):
-            fact *= i
-        print(f"Factorial: {fact}")
-        result=fact
-        return result
-    else:
-        num = int(input("Enter number to factorial : "))
-        fact = 1
-        for i in range(1, num + 1):
-            fact *= i
-        print(f"Factorial: {fact}")
-        result=fact
-        return result
+    num = int(input("Enter number to factorial : "))
+    fact = 1
+    for i in range(1, num + 1):
+        fact *= i
+    print(f"Factorial: {fact}")
+    result=fact
+    return result
 
 def divide_numbers(result):
     if result_flag:
@@ -79,7 +65,7 @@ def divide_numbers(result):
         return result
     else:
         n1=float(input("Enter dividend : "))
-        n2=float(input("Enter divisor "))
+        n2=float(input("Enter divisor : "))
         result=n1/n2
         print(f"Quotient : {result}")
         return result
@@ -112,17 +98,17 @@ def trigonometric_submenu(result):
         if result_flag:
             radian_val = math.radians(result)
             if choice == '1':
-                print(f"Sine value: {round(math.sin(radian_val),2)}")
+                print(f"Sine value: {round(math.sin(radian_val),3)}")
             elif choice == '2':
-                print(f"Cosine value: {round(math.cos(radian_val),2)}")
+                print(f"Cosine value: {round(math.cos(radian_val),3)}")
             elif choice == '3':
-                print(f"Tangent value: {round(math.tan(radian_val),2)}")
+                print(f"Tangent value: {round(math.tan(radian_val),3)}")
             elif choice == '4':
-                print(f"Secant value: {round(1/math.cos(radian_val),2)}")
+                print(f"Secant value: {round(1/math.cos(radian_val),3)}")
             elif choice == '5':
-                print(f"Cosecant value: {round(1/math.sin(radian_val),2)}")
+                print(f"Cosecant value: {round(1/math.sin(radian_val),3)}")
             elif choice == '6':
-                print(f"Cotangent value: {round(1/math.tan(radian_val),2)}")
+                print(f"Cotangent value: {round(1/math.tan(radian_val),3)}")
             elif choice == '7':
                 print(f"Sine inverse value: {math.degrees(math.asin(result))}")
             elif choice == '8':
@@ -140,17 +126,17 @@ def trigonometric_submenu(result):
             deg=float(input("Enter values in degrees : "))
             radian_val=math.radians(deg)
             if choice == '1':
-                print(f"Sine value: {round(math.sin(radian_val),2)}")
+                print(f"Sine value: {round(math.sin(radian_val),3)}")
             elif choice == '2':
-                print(f"Cosine value: {round(math.cos(radian_val),2)}")
+                print(f"Cosine value: {round(math.cos(radian_val),3)}")
             elif choice == '3':
-                print(f"Tangent value: {round(math.tan(radian_val),2)}")
+                print(f"Tangent value: {round(math.tan(radian_val),3)}")
             elif choice == '4':
-                print(f"Secant value: {round(1/math.cos(radian_val),2)}")
+                print(f"Secant value: {round(1/math.cos(radian_val),3)}")
             elif choice == '5':
-                print(f"Cosecant value: {round(1/math.sin(radian_val),2)}")
+                print(f"Cosecant value: {round(1/math.sin(radian_val),3)}")
             elif choice == '6':
-                print(f"Cotangent value: {round(1/math.tan(radian_val),2)}")
+                print(f"Cotangent value: {round(1/math.tan(radian_val),3)}")
             elif choice == '7':
                 print(f"Sine inverse value: {math.degrees(math.asin(result))}")
             elif choice == '8':
@@ -175,17 +161,18 @@ while True:
         print("1. Addition")
         print("2. Subtraction")
         print("3. Multiplication")
-        print("4. Trigonometric submenu")
-        print("5. Factorial")
-        print("6. Exit")
+        print("4. Division")
+        print("5. Trigonometric submenu")
+        print("6. Factorial")
+        print("7. Exit")
 
         choice = input("Enter your choice: ")
 
-        if choice == '6':
+        if choice == '7':
             print("Exiting the calculator. Goodbye!")
             exit(0)
 
-        if not choice.isdigit() or int(choice) < 1 or int(choice) > 6:
+        if not choice.isdigit() or int(choice) < 1 or int(choice) > 7:
             print("Invalid choice. Please choose again.")
             continue
 
@@ -195,10 +182,11 @@ while True:
             result = subtract_numbers(result)
         elif choice == '3':
             result = multiply_numbers(result)
-        elif choice == '4':
+        elif choice=='4':
+            divide_numbers(result)
+        elif choice == '5':
             trigonometric_submenu(result)
-
-        elif choice =='5'
+        elif choice =='6':
             factorial_of_number(result)
 
         choice = input("Do you want to perform another operation on this result? (yes/no): ")
