@@ -44,6 +44,29 @@ def multiply_numbers(result):
         print(f"Product : {result}")
         return result
       
+    num = float(input("Enter the number to multiply: "))
+    result *= num
+    print(f"Product: {result}")
+    return result
+  
+def factorial_of_number(result):
+    if result flag:
+        num = int(result)
+        fact = 1
+        for i in range(1, num + 1):
+            fact *= i
+        print(f"Factorial: {fact}")
+        result=fact
+        return result
+    else:
+        num = int(input("Enter number to factorial : "))
+        fact = 1
+        for i in range(1, num + 1):
+            fact *= i
+        print(f"Factorial: {fact}")
+        result=fact
+        return result
+
 def divide_numbers(result):
     if result_flag:
         print(f"Dividing from(dividend) : {result}")
@@ -60,7 +83,7 @@ def divide_numbers(result):
         result=n1/n2
         print(f"Quotient : {result}")
         return result
-    
+      
 def trigonometric_submenu(result):
     while True:
         print("\nTrigonometric functions:")
@@ -88,7 +111,6 @@ def trigonometric_submenu(result):
         
         if result_flag:
             radian_val = math.radians(result)
-        
             if choice == '1':
                 print(f"Sine value: {round(math.sin(radian_val),2)}")
             elif choice == '2':
@@ -154,11 +176,12 @@ while True:
         print("2. Subtraction")
         print("3. Multiplication")
         print("4. Trigonometric submenu")
-        print("5. Exit")
+        print("5. Factorial")
+        print("6. Exit")
 
         choice = input("Enter your choice: ")
 
-        if choice == '5':
+        if choice == '6':
             print("Exiting the calculator. Goodbye!")
             exit(0)
 
@@ -174,6 +197,9 @@ while True:
             result = multiply_numbers(result)
         elif choice == '4':
             trigonometric_submenu(result)
+
+        elif choice =='5'
+            factorial_of_number(result)
 
         choice = input("Do you want to perform another operation on this result? (yes/no): ")
         if choice.lower() != 'yes':
