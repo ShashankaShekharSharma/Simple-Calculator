@@ -86,17 +86,17 @@ def trigonometric_submenu(result):
         elif choice == '6':
             print(f"Cotangent value: {1/math.tan(radian_val)}")
         elif choice == '7':
-            print(f"Sine inverse value: {math.degrees(math.asin(result))}")
+            print(f"Sine inverse value: {round(math.degrees(math.asin(result)),2)}")
         elif choice == '8':
-            print(f"Cosine inverse value: {math.degrees(math.acos(result))}")
+            print(f"Cosine inverse value: {round(math.degrees(math.acos(result)),2)}")
         elif choice == '9':
-            print(f"Tangent inverse value: {math.degrees(math.atan(result))}")
+            print(f"Tangent inverse value: {round(math.degrees(math.atan(result)),2)}")
         elif choice == '10':
-            print(f"Cosecant inverse value: {math.degrees(math.asin(1/result))}")
+            print(f"Cosecant inverse value: {round(math.degrees(math.asin(1/result)),2)}")
         elif choice == '11':
-            print(f"Secant inverse value: {math.degrees(math.acos(1/result))}")
+            print(f"Secant inverse value: {round(math.degrees(math.acos(1/result)),2)}")
         elif choice == '12':
-            print(f"Cotangent inverse value: {math.degrees(math.atan(1/result))}")
+            print(f"Cotangent inverse value: {round(math.degrees(math.atan(1/result)),2}")
 
 def divide_numbers(result):
     if result_flag:
