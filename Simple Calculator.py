@@ -1,3 +1,4 @@
+import math
 def add_numbers(result):
     count = int(input("How many numbers do you want to add? "))
     for i in range(count):
