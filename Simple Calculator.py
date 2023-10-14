@@ -1,3 +1,4 @@
+#Adding the numbers
 def add_numbers():
     sum_result = 0
     count = int(input("How many numbers do you want to add? "))
@@ -6,21 +7,21 @@ def add_numbers():
         sum_result += num
     print(f"Sum: {sum_result}")
     return sum_result
-
+#Subtracting the numbers
 def subtract_numbers(result):
     num = float(input("Enter the number to subtract: "))
     result -= num
     print(f"Difference: {result}")
     return result
-
+#Multiplying the numbers
 def multiply_numbers(result):
     num = float(input("Enter the number to multiply: "))
     result *= num
     print(f"Product: {result}")
     return result
-
+#creating a result variable
 result = 0
-
+#Main Menu Section
 print("Hi! I can perform simple calculations. I can add, multiply, and subtract.")
 
 while True:
@@ -32,7 +33,7 @@ while True:
         print("4. Exit")
 
         choice = input("Enter your choice: ")
-
+#Looping statements
         if choice == '4':
             print("Exiting the calculator. Goodbye!")
             exit(0)
