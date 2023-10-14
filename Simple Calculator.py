@@ -47,6 +47,23 @@ def multiply_numbers(result):
     result *= num
     print(f"Product: {result}")
     return result
+def factorial_of_number(result):
+    if result flag:
+        num = int(result)
+        fact = 1
+        for i in range(1, num + 1):
+            fact *= i
+        print(f"Factorial: {fact}")
+        result=fact
+        return result
+    else:
+        num = int(input("Enter number to factorial : "))
+        fact = 1
+        for i in range(1, num + 1):
+            fact *= i
+        print(f"Factorial: {fact}")
+        result=fact
+        return result
 def trigonometric_submenu(result):
     while True:
         print("\nTrigonometric functions:")
@@ -86,17 +103,17 @@ def trigonometric_submenu(result):
         elif choice == '6':
             print(f"Cotangent value: {1/math.tan(radian_val)}")
         elif choice == '7':
-            print(f"Sine inverse value: {round(math.degrees(math.asin(result)),2)}")
+            print(f"Sine inverse value: {round(math.degrees(math.asin(radian_value)),2)}")
         elif choice == '8':
-            print(f"Cosine inverse value: {round(math.degrees(math.acos(result)),2)}")
+            print(f"Cosine inverse value: {round(math.degrees(math.acos(radian_value)),2)}")
         elif choice == '9':
-            print(f"Tangent inverse value: {round(math.degrees(math.atan(result)),2)}")
+            print(f"Tangent inverse value: {round(math.degrees(math.atan(radian_value)),2)}")
         elif choice == '10':
-            print(f"Cosecant inverse value: {round(math.degrees(math.asin(1/result)),2)}")
+            print(f"Cosecant inverse value: {round(math.degrees(math.asin(1/radian_value)),2)}")
         elif choice == '11':
-            print(f"Secant inverse value: {round(math.degrees(math.acos(1/result)),2)}")
+            print(f"Secant inverse value: {round(math.degrees(math.acos(1/radian_value)),2)}")
         elif choice == '12':
-            print(f"Cotangent inverse value: {round(math.degrees(math.atan(1/result)),2}")
+            print(f"Cotangent inverse value: {round(math.degrees(math.atan(1/radian_value)),2}")
 
 def divide_numbers(result):
     if result_flag:
@@ -126,15 +143,16 @@ while True:
         print("2. Subtraction")
         print("3. Multiplication")
         print("4. Trigonometric submenu")
-        print("5. Exit")
+        print("5. Factorial")
+        print("6. Exit")
 
         choice = input("Enter your choice: ")
 
-        if choice == '5':
+        if choice == '6':
             print("Exiting the calculator. Goodbye!")
             exit(0)
 
-        if not choice.isdigit() or int(choice) < 1 or int(choice) > 3:
+        if not choice.isdigit() or int(choice) < 1 or int(choice) > 6:
             print("Invalid choice. Please choose again.")
             continue
 
@@ -146,7 +164,8 @@ while True:
             result = multiply_numbers(result)
         elif choice == '4':
             trigonometric_submenu(result)
-
+        elif choice =='5'
+            factorial_of_number(result)
 
         choice = input("Do you want to perform another operation on this result? (yes/no): ")
         if choice.lower() != 'yes':
