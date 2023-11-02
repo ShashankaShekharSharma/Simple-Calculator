@@ -2,9 +2,10 @@ import math
 import csv
 import os
 import time
+import numpy as np
+import matplotlib.pyplot as plt
 start_time = time.time()
 history_file = "calculator_history.csv"
-
 
 def save_to_csv(operation, result):
     with open(history_file, mode="a", newline="") as file:
@@ -153,6 +154,26 @@ def subtract_numbers(result):
         return result
 
 
+def polynomial_graph(result):
+    degree = int(input("Enter the degree of the polynomial: "))
+    coefficients = []
+    for i in range(degree + 1):
+        coefficient = float(input(f"Enter the coefficient for x^{i}: "))
+        coefficients.append(coefficient)
+    y = 0
+    for i in range(len(coefficients)):
+        y += coefficients[i] * x**i
+    return y
+    x = np.linspace(-10, 10, 400)
+    y = polynomial(x, coefficients)
+    plt.figure(figsize=(8, 6))
+    plt.plot(x, y, label='Polynomial Equation', color='b')
+    plt.title('Graph of the Polynomial Equation')
+    plt.xlabel('X-axis')
+    plt.ylabel('Y-axis')
+    plt.legend()
+    plt.grid()
+    plt.show()
 def multiply_numbers(result):
     if result_flag:
         operation = str(result) + "*"
@@ -250,7 +271,29 @@ def log(result):
             print(result)
         else:
             print("invalid")
+def plot_polynomial(degree, coefficients):
+    # Function to evaluate the polynomial equation
+    def polynomial(x, coefficients):
+        y = 0
+        for i in range(len(coefficients)):
+            y += coefficients[i] * x**i
+        return y
 
+    # Generate x values
+    x = np.linspace(-10, 10, 400)
+
+    # Compute corresponding y values
+    y = polynomial(x, coefficients)
+
+    # Plot the graph
+    plt.figure(figsize=(8, 6))
+    plt.plot(x, y, label='Polynomial Equation', color='b')
+    plt.title('Graph of the Polynomial Equation')
+    plt.xlabel('X-axis')
+    plt.ylabel('Y-axis')
+    plt.legend()
+    plt.grid()
+    plt.show()
 def trigonometric_submenu(result):
     while True:
         print("\nTrigonometric functions:")
@@ -376,18 +419,19 @@ while True:
         print("7. Solve Quadratic Equation")
         print("8. Solve Cubic Equations")
         print("9. Logarithms")
-        print("10. Exit")
+        print("10. Graph of Polynomial Equation")
+        print("11. Exit")
 
         choice = input("Enter your choice: ")
 
-        if choice == "10":
+        if choice == "11":
             print("Exiting the calculator. Goodbye!")
             end_time = time.time()
             time_spent = end_time - start_time
             print("Time spent on Calculator = "+str(round(time_spent,2))+"s")
             exit(0)
 
-        if not choice.isdigit() or int(choice) < 1 or int(choice) > 10:
+        if not choice.isdigit() or int(choice) < 1 or int(choice) > 11:
             print("Invalid choice. Please choose again.")
             continue
 
@@ -409,6 +453,15 @@ while True:
             result = solve_cubic_equation(result)
         elif choice == "9":
             result = log(result)
+        elif choice == "10":
+            degree = int(input("Enter the degree of the polynomial: "))
+            coefficients = []
+            for i in range(1,degree + 1):
+                coefficient = float(input(f"Enter the coefficient for x^{i}: "))
+                coefficients.append(coefficient)
+            const=int(input("Enter the value of constant term "))
+            coefficients.append(const)
+            plot_polynomial(degree, coefficients)
         elif choice == "history":
             load_from_csv()
             continue
