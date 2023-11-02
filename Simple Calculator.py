@@ -1,7 +1,8 @@
 import math
 import csv
 import os
-
+import time
+start_time = time.time()
 history_file = "calculator_history.csv"
 
 
@@ -381,6 +382,9 @@ while True:
 
         if choice == "10":
             print("Exiting the calculator. Goodbye!")
+            end_time = time.time()
+            time_spent = end_time - start_time
+            print("Time spent on Calculator = "+str(round(time_spent,2))+"s")
             exit(0)
 
         if not choice.isdigit() or int(choice) < 1 or int(choice) > 10:
@@ -426,4 +430,7 @@ while True:
     choice = input("Do you want to start a new operation? (yes/no): ")
     if choice.lower() != "yes":
         print("Exiting the calculator. Goodbye!")
+        end_time = time.time()
+        time_spent = end_time - start_time
+        print("Time spent on Calculator = " + str(round(time_spent, 2)) + "s")
         break
