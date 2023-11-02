@@ -224,6 +224,31 @@ def divide_numbers(result):
         save_to_csv(operation, result)
         return result
 
+def log(result):
+    if result_flag:
+        print("taking log of ",result)
+        num = input("Enter the base: (type 'e' for natural log)")
+        num = int(num)
+        if num == 'e':
+            result = math.log(result)
+            print(result)
+        elif num > 0:
+            result = math.log(result,num)
+            print(result)
+        else:
+            result("invalid")
+        operation = 'log of'+str(result)+'base'+str(num)
+        save_to_csv(operation,result)
+    else:
+        a = int(input("enter the number "))
+        num = int(input("Enter the base "))
+        if a>0 and num>0:
+            result=math.log(a,num)
+            operation='log of '+str(a)+ 'base'+ str(num)
+            save_to_csv(operation,result)
+            print(result)
+        else:
+            print("invalid")
 
 def trigonometric_submenu(result):
     while True:
@@ -349,15 +374,16 @@ while True:
         print("6. Factorial")
         print("7. Solve Quadratic Equation")
         print("8. Solve Cubic Equations")
-        print("9. Exit")
+        print("9. Logarithms")
+        print("10. Exit")
 
         choice = input("Enter your choice: ")
 
-        if choice == "9":
+        if choice == "10":
             print("Exiting the calculator. Goodbye!")
             exit(0)
 
-        if not choice.isdigit() or int(choice) < 1 or int(choice) > 9:
+        if not choice.isdigit() or int(choice) < 1 or int(choice) > 10:
             print("Invalid choice. Please choose again.")
             continue
 
@@ -376,7 +402,9 @@ while True:
         elif choice == "7":
             result = solve_quadratic_equation(result)
         elif choice == "8":
-            result=solve_cubic_equation(result)
+            result = solve_cubic_equation(result)
+        elif choice == "9":
+            result = log(result)
         elif choice == "history":
             load_from_csv()
             continue
