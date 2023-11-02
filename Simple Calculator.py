@@ -41,7 +41,6 @@ def add_numbers(result):
         print(f"Sum: {result}")
         save_to_csv(operation, result)
         return result
-
     else:
         num1 = float(input("Enter number 1 : "))
         num2 = float(input("Enter number 2 : "))
@@ -51,6 +50,76 @@ def add_numbers(result):
         print(f"Sum : {result}")
         return result
 
+def solve_quadratic_equation(result):
+    print("Enter the coefficients of the quadratic equation (ax^2 + bx + c = 0):")
+    a = float(input("Enter coefficient a: "))
+    b = float(input("Enter coefficient b: "))
+    c = float(input("Enter coefficient c: "))
+
+    discriminant = b * b - 4 * a * c
+    operation = 'Solving the equation: '+str(a)+'x^2'+str(b)+'x+'+str(c)+'=0'
+    if discriminant > 0:
+        root1 = (-b + math.sqrt(discriminant)) / (2 * a)
+        root2 = (-b - math.sqrt(discriminant)) / (2 * a)
+        print(f"The roots are real and distinct: {root1} and {root2}")
+        ans=[root1,root2]
+    elif discriminant == 0:
+        root1 = root2 = -b / (2 * a)
+        print(f"The roots are real and equal: {root1} and {root2}")
+        ans=[root1,root2]
+    else:
+        realPart = -b / (2 * a)
+        imaginaryPart = math.sqrt(-discriminant) / (2 * a)
+        print(f"The roots are complex and different: {realPart}+{imaginaryPart}i and {realPart}-{imaginaryPart}i")
+        ans = [str(realPart)+'i'+str(imaginaryPart)+'j',str(realPart)+'i-'+str(imaginaryPart)+'j']
+    save_to_csv(operation, ans)
+
+def solve_cubic_equation(result):
+    print("Enter the coefficients of the cubic equation (ax^3 + bx^2 + cx + d = 0):")
+    a = float(input("Enter coefficient a: "))
+    b = float(input("Enter coefficient b: "))
+    c = float(input("Enter coefficient c: "))
+    d = float(input("Enter coefficient d: "))
+    operation = 'Solving the equation: ' + str(a) + 'x^3' + str(b) + 'x^2+' + str(c)+'x+'+str(d) + '=0'
+    p = (3 * a * c - b ** 2) / (3 * a ** 2)
+    q = (2 * b ** 3 - 9 * a * b * c + 27 * a ** 2 * d) / (27 * a ** 3)
+
+    discriminant = q ** 2 / 4 + p ** 3 / 27
+    if discriminant > 0:
+        S = (q / 2 + math.sqrt(discriminant)) ** (1 / 3)
+        T = (q / 2 - math.sqrt(discriminant)) ** (1 / 3)
+        root1 = -b / (3 * a) - (S + T)
+        print(f"The real root is: {root1}")
+        imaginary = (S - T) * math.sqrt(3) / 2
+        root2 = -b / (3 * a) + (S + T) / 2 + imaginary
+        root3 = -b / (3 * a) + (S + T) / 2 - imaginary
+        print(f"The complex roots are: {root2} and {root3}")
+        ans=[str(root1),str(root2)+'j'+str(root3)+'j']
+        save_to_csv(operation,ans)
+    elif discriminant == 0:
+        if q < 0:
+            A = (abs(q) / 2) ** (1 / 3)
+            root1 = -b / (3 * a) - 2 * A
+            root2 = -b / (3 * a) + A
+            print(f"The real root is: {root1} and the complex root is: {root2} + {root2}i")
+            ans=[str(root1),str(root2)+'i'+str(root2)+'j']
+            save_to_csv(operation,ans)
+        else:
+            A = (-q / 2) ** (1 / 3)
+            root1 = -b / (3 * a) - 2 * A
+            root2 = -b / (3 * a) + A
+            print(f"The real root is: {root1} and the complex root is: {root2} - {root2}i")
+            ans=[str(root1),str(root2)+'i-'+str(root2)+'j']
+            save_to_csv(operation,ans)
+    else:
+        x = math.sqrt((q ** 2 / 4) - discriminant)
+        θ = math.acos(-q / (2 * math.sqrt(discriminant)))
+        root1 = 2 * math.sqrt(-p / 3) * math.cos(θ / 3) - b / (3 * a)
+        root2 = 2 * math.sqrt(-p / 3) * math.cos((θ + 2 * math.pi) / 3) - b / (3 * a)
+        root3 = 2 * math.sqrt(-p / 3) * math.cos((θ + 4 * math.pi) / 3) - b / (3 * a)
+        print(f"The roots are: {root1}, {root2}, and {root3}")
+        ans=[root1,root2,root3]
+        save_to_csv(operation,ans)
 
 def subtract_numbers(result):
     if result_flag:
@@ -271,21 +340,24 @@ result = 0
 while True:
     while True:
         print("\nChoose the operation:")
+        print("Type history to see previous calculations")
         print("1. Addition")
         print("2. Subtraction")
         print("3. Multiplication")
         print("4. Division")
         print("5. Trigonometric submenu")
         print("6. Factorial")
-        print("7. Exit")
+        print("7. Solve Quadratic Equation")
+        print("8. Solve Cubic Equations")
+        print("9. Exit")
 
         choice = input("Enter your choice: ")
 
-        if choice == "7":
+        if choice == "9":
             print("Exiting the calculator. Goodbye!")
             exit(0)
 
-        if not choice.isdigit() or int(choice) < 1 or int(choice) > 7:
+        if not choice.isdigit() or int(choice) < 1 or int(choice) > 9:
             print("Invalid choice. Please choose again.")
             continue
 
@@ -301,6 +373,10 @@ while True:
             result = trigonometric_submenu(result)
         elif choice == "6":
             result = factorial_of_number(result)
+        elif choice == "7":
+            result = solve_quadratic_equation(result)
+        elif choice == "8":
+            result=solve_cubic_equation(result)
         elif choice == "history":
             load_from_csv()
             continue
