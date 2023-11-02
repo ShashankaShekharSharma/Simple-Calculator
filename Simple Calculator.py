@@ -6,23 +6,24 @@ history_file = "calculator_history.csv"
 
 
 def save_to_csv(operation, result):
-    with open(history_file, mode='a', newline='') as file:
+    with open(history_file, mode="a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow([operation, result])
 
 
 def load_from_csv():
     if os.path.exists(history_file):
-        with open(history_file, mode='r') as file:
+        with open(history_file, mode="r") as file:
             reader = csv.reader(file)
             for row in reader:
                 print(row)
     else:
         print("No history found.")
 
+
 def add_numbers(result):
     if result_flag:
-        operation = str(result)+ '+'
+        operation = str(result) + "+"
         temp = []
         print(f"Adding numbers to : {result}")
         count = int(input("How many numbers do you want to add? "))
@@ -33,10 +34,10 @@ def add_numbers(result):
         for i in range(len(temp)):
             if i != len(temp) - 1:
                 operation += str(temp[i])
-                operation += '+'
+                operation += "+"
             else:
                 operation += str(temp[i])
-                operation += '='
+                operation += "="
         print(f"Sum: {result}")
         save_to_csv(operation, result)
         return result
@@ -45,13 +46,15 @@ def add_numbers(result):
         num1 = float(input("Enter number 1 : "))
         num2 = float(input("Enter number 2 : "))
         result = num1 + num2
-        operation = str(num1)+'+'+str(num2)
+        operation = str(num1) + "+" + str(num2)
         save_to_csv(operation, result)
         print(f"Sum : {result}")
         return result
+
+
 def subtract_numbers(result):
     if result_flag:
-        operation = str(result) + '-'
+        operation = str(result) + "-"
         temp = []
         print(f"Adding numbers to : {result}")
         count = int(input("How many numbers do you want to subtract? "))
@@ -62,19 +65,19 @@ def subtract_numbers(result):
         for i in range(len(temp)):
             if i != len(temp) - 1:
                 operation += str(temp[i])
-                operation += '-'
+                operation += "-"
             else:
                 operation += str(temp[i])
-                operation += '='
+                operation += "="
         print(f"Sum: {result}")
         save_to_csv(operation, result)
         return result
     else:
-        operation = ' '
+        operation = " "
         n1 = float(input("Enter number to subtract from : "))
         n2 = float(input("Enter number to subtract "))
         result = n1 - n2
-        operation = str(n1)+'-'+str(n2)
+        operation = str(n1) + "-" + str(n2)
         print(f"Difference : {result}")
         save_to_csv(operation, result)
         return result
@@ -82,7 +85,7 @@ def subtract_numbers(result):
 
 def multiply_numbers(result):
     if result_flag:
-        operation = str(result) + '*'
+        operation = str(result) + "*"
         temp = []
         print(f"Adding numbers to : {result}")
         count = int(input("How many numbers do you want to multiply? "))
@@ -93,10 +96,10 @@ def multiply_numbers(result):
         for i in range(len(temp)):
             if i != len(temp) - 1:
                 operation += str(temp[i])
-                operation += '*'
+                operation += "*"
             else:
                 operation += str(temp[i])
-                operation += '='
+                operation += "="
         print(f"Sum: {result}")
         save_to_csv(operation, result)
         return result
@@ -104,20 +107,29 @@ def multiply_numbers(result):
         n1 = float(input("Enter number 1 : "))
         n2 = float(input("Enter number 2 : "))
         result = n1 * n2
-        operation = str(n1)+'*'+str(n2)
+        operation = str(n1) + "x" + str(n2)
         print(f"Product : {result}")
         save_to_csv(operation, result)
         return result
 
 
 def factorial_of_number(result):
+    operation = ""
+    temp = []
     num = int(input("Enter number to factorial : "))
     fact = 1
     for i in range(1, num + 1):
+        temp.append(i)
         fact *= i
     print(f"Factorial: {fact}")
+    for i in range(len(temp)):
+        if i < (len(temp)-1):
+            operation += str(temp[i])
+            operation += "x"
+        else:
+            operation += str(temp[i])
     result = fact
-
+    save_to_csv(operation, result)
     return result
 
 
@@ -130,7 +142,7 @@ def divide_numbers(result):
             print("Error: Division by zero")
             return result
         result /= num
-        operation = str(result) + '/' + str(num)
+        operation = str(result) + "/" + str(num)
         print(f"Quotient: {result}")
         save_to_csv(operation, result)
         return result
@@ -138,7 +150,7 @@ def divide_numbers(result):
         n1 = float(input("Enter dividend : "))
         n2 = float(input("Enter divisor : "))
         result = n1 / n2
-        operation = str(n1)+'/'+str(n2)
+        operation = str(n1) + "/" + str(n2)
         print(f"Quotient : {result}")
         save_to_csv(operation, result)
         return result
@@ -162,7 +174,7 @@ def trigonometric_submenu(result):
         print("13. Back to Main Menu")
         choice = input("Enter your choice: ")
 
-        if choice == '13':
+        if choice == "13":
             break
 
         if not choice.isdigit() or int(choice) < 1 or int(choice) > 12:
@@ -171,58 +183,84 @@ def trigonometric_submenu(result):
 
         if result_flag:
             radian_val = math.radians(result)
-            if choice == '1':
-                print(f"Sine value: {round(math.sin(radian_val), 3)}")
-            elif choice == '2':
-                print(f"Cosine value: {round(math.cos(radian_val), 3)}")
-            elif choice == '3':
-                print(f"Tangent value: {round(math.tan(radian_val), 3)}")
-            elif choice == '4':
-                print(f"Secant value: {round(1 / math.cos(radian_val), 3)}")
-            elif choice == '5':
-                print(f"Cosecant value: {round(1 / math.sin(radian_val), 3)}")
-            elif choice == '6':
-                print(f"Cotangent value: {round(1 / math.tan(radian_val), 3)}")
-            elif choice == '7':
-                print(f"Sine inverse value: {math.degrees(math.asin(result))}")
-            elif choice == '8':
-                print(f"Cosine inverse value: {math.degrees(math.acos(result))}")
-            elif choice == '9':
-                print(f"Tangent inverse value: {math.degrees(math.atan(result))}")
-            elif choice == '10':
-                print(f"Cosecant inverse value: {math.degrees(math.asin(1 / result))}")
-            elif choice == '11':
-                print(f"Secant inverse value: {math.degrees(math.acos(1 / result))}")
-            elif choice == '12':
-                print(f"Cotangent inverse value: {math.degrees(math.atan(1 / result))}")
+            if choice == "1":
+                result=round(math.sin(radian_val),3)
+                operations="sine :"+str(radian_val)
+            elif choice == "2":
+                result=round(math.cos(radian_val),3)
+                operations="cosine : "+str(radian_val)
+            elif choice == "3":
+                result=round(math.tan(radian_val),3)
+                operations="tangent : "+str(radian_val)
+            elif choice == "4":
+                result=round(1/math.cos(radian_val),3)
+                operations="secant : "+str(radian_val)
+            elif choice == "5":
+                result=round(1/math.sin(radian_val),3)
+                operations="cosecant : "+str(radian_val)
+            elif choice == "6":
+                result=round(1/math.tan(radian_val),3)
+                operations="cotangent : "+str(radian_val)
+            elif choice == "7":
+                result=round(math.asin(result),3)
+                operations="sine inverse : "+str(radian_val)
+            elif choice == "8":
+                result=round(math.acos(result),3)
+                operations="cosine inverse : "+str(radian_val)
+            elif choice == "9":
+                result=round(math.atan(result),3)
+                operations="tangent inverse : "+str(radian_val)
+            elif choice == "10":
+                result=round(math.asin(1/result),3)
+                operations="cosecant inverse : "+str(radian_val)
+            elif choice == "11":
+                result=round(math.acos(1/result),3)
+                operations="secant inverse : "+str(radian_val)
+            elif choice == "12":
+                result=round(math.atan(1/result),3)
+                operations="cotangent inverse : "+str(radian_val)
+            save_to_csv(operations,result)
 
         else:
             deg = float(input("Enter values in degrees : "))
             radian_val = math.radians(deg)
-            if choice == '1':
-                print(f"Sine value: {round(math.sin(radian_val), 3)}")
-            elif choice == '2':
-                print(f"Cosine value: {round(math.cos(radian_val), 3)}")
-            elif choice == '3':
-                print(f"Tangent value: {round(math.tan(radian_val), 3)}")
-            elif choice == '4':
-                print(f"Secant value: {round(1 / math.cos(radian_val), 3)}")
-            elif choice == '5':
-                print(f"Cosecant value: {round(1 / math.sin(radian_val), 3)}")
-            elif choice == '6':
-                print(f"Cotangent value: {round(1 / math.tan(radian_val), 3)}")
-            elif choice == '7':
-                print(f"Sine inverse value: {math.degrees(math.asin(result))}")
-            elif choice == '8':
-                print(f"Cosine inverse value: {math.degrees(math.acos(result))}")
-            elif choice == '9':
-                print(f"Tangent inverse value: {math.degrees(math.atan(result))}")
-            elif choice == '10':
-                print(f"Cosecant inverse value: {math.degrees(math.asin(1 / result))}")
-            elif choice == '11':
-                print(f"Secant inverse value: {math.degrees(math.acos(1 / result))}")
-            elif choice == '12':
-                print(f"Cotangent inverse value: {math.degrees(math.atan(1 / result))}")
+            if choice == "1":
+                result=round(math.sin(radian_val),3)
+                operations="sine :"+str(radian_val)
+            elif choice == "2":
+                result=round(math.cos(radian_val),3)
+                operations="cosine : "+str(radian_val)
+            elif choice == "3":
+                result=round(math.tan(radian_val),3)
+                operations="tangent : "+str(radian_val)
+            elif choice == "4":
+                result=round(1/math.cos(radian_val),3)
+                operations="secant : "+str(radian_val)
+            elif choice == "5":
+                result=round(1/math.sin(radian_val),3)
+                operations="cosecant : "+str(radian_val)
+            elif choice == "6":
+                result=round(1/math.tan(radian_val),3)
+                operations="cotangent : "+str(radian_val)
+            elif choice == "7":
+                result=round(math.asin(result),3)
+                operations="sine inverse : "+str(radian_val)
+            elif choice == "8":
+                result=round(math.acos(result),3)
+                operations="cosine inverse : "+str(radian_val)
+            elif choice == "9":
+                result=round(math.atan(result),3)
+                operations="tangent inverse : "+str(radian_val)
+            elif choice == "10":
+                result=round(math.asin(1/result),3)
+                operations="cosecant inverse : "+str(radian_val)
+            elif choice == "11":
+                result=round(math.acos(1/result),3)
+                operations="secant inverse : "+str(radian_val)
+            elif choice == "12":
+                result=round(math.atan(1/result),3)
+                operations="cotangent inverse : "+str(radian_val)
+            save_to_csv(operations,result)
         return result
 
 
@@ -243,7 +281,7 @@ while True:
 
         choice = input("Enter your choice: ")
 
-        if choice == '7':
+        if choice == "7":
             print("Exiting the calculator. Goodbye!")
             exit(0)
 
@@ -251,28 +289,30 @@ while True:
             print("Invalid choice. Please choose again.")
             continue
 
-        if choice == '1':
+        if choice == "1":
             result = add_numbers(result)
-        elif choice == '2':
+        elif choice == "2":
             result = subtract_numbers(result)
-        elif choice == '3':
+        elif choice == "3":
             result = multiply_numbers(result)
-        elif choice == '4':
+        elif choice == "4":
             result = divide_numbers(result)
-        elif choice == '5':
+        elif choice == "5":
             result = trigonometric_submenu(result)
-        elif choice == '6':
+        elif choice == "6":
             result = factorial_of_number(result)
         elif choice == "history":
             load_from_csv()
             continue
 
-        choice = input("Do you want to perform another operation on this result? (yes/no): ")
-        if choice.lower() == 'history':
+        choice = input(
+            "Do you want to perform another operation on this result? (yes/no): "
+        )
+        if choice.lower() == "history":
             print("Displaying history:")
             load_from_csv()
             continue
-        elif choice.lower() != 'yes':
+        elif choice.lower() != "yes":
             result = 0
 
             break
@@ -280,6 +320,6 @@ while True:
             result_flag = True
             continue
     choice = input("Do you want to start a new operation? (yes/no): ")
-    if choice.lower() != 'yes':
+    if choice.lower() != "yes":
         print("Exiting the calculator. Goodbye!")
         break
