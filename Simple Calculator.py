@@ -183,11 +183,11 @@ while True:
         elif choice == '3':
             result = multiply_numbers(result)
         elif choice=='4':
-            divide_numbers(result)
+            result=divide_numbers(result)
         elif choice == '5':
-            trigonometric_submenu(result)
+            result=trigonometric_submenu(result)
         elif choice =='6':
-            factorial_of_number(result)
+            result=factorial_of_number(result)
 
         choice = input("Do you want to perform another operation on this result? (yes/no): ")
         if choice.lower() != 'yes':
